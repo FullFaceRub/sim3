@@ -5,6 +5,7 @@ const passport = require('passport')
     , massive = require('massive')
     , express = require('express')
     , session = require('express-session')
+    , controller = require('./controller')
 
 const {SERVER_PORT} = process.env;
 const { AUTH_DOMAIN, CLIENT_ID, CLIENT_SECRET, CALLBACK_URL } = process.env;
@@ -72,6 +73,8 @@ app.get('/auth/me', (req,res)=>{
     }
 })
 
+app.put('/editprofile/:first_name/:last_name/:gender/:hobby/:hair_color/:eye_color/:birthday_day/:birthday_month/:birthday_year', controller.editProfile);
+app.get('/friends/:sort', controller.getFriends);
 
 app.listen(SERVER_PORT, () => {
     console.log(`That's no moon! It's a port ${SERVER_PORT}`)
